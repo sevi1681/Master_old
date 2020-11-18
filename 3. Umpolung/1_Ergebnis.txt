@@ -1,0 +1,16 @@
+
+bei u=[-1.0 -1.0 -1.0 -1.0         1.0  1.0  1.0  1.0  1.0    1.0 ]  
+
+x(9)= 3.2083571447110216e-8 der neue Maximal Wert
+
+
+
+
+
+u=[ 1.0  1.0  1.0  1.0        -1.0 -1.0 -1.0 -1.0 -1.0   -1.0 ]
+
+x(9)= -3.1228560012362763e-8 der neue Maximal Wert
+
+
+
+Fazit: die Extrema steigen nach Umpolung (4,5 gleiche Samples von u)

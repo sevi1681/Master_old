@@ -1,0 +1,4 @@
+1_test   berechnung für nur einen Wert von c
+
+2_test   berechnung für mehrere Werte von c in einer for schleife
+

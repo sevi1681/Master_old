@@ -1,0 +1,18 @@
+
+u=[-1.0 -1.0 -1.0 -1.0 -1.0   1.0 1.0 1.0 1.0     -1.0 -1.0 -1.0 -1.0    1.0 1.0 1.0 1.0 1.0    1.0 ]
+
+x(18)= 3.219170467950419e-8 der neue Maximal Wert
+
+
+
+
+
+u=[ 1.0 1.0 1.0 1.0 1.0    -1.0 -1.0 -1.0 -1.0     1.0 1.0 1.0 1.0   -1.0 -1.0 -1.0 -1.0 -1.0    -1.0]
+
+x(18)= -3.138552871575272e-8 der neue Minimal Wert
+
+
+
+
+
+Fazit: die Extrema steigen weiter nach 3x-Umpolung (5,4,4,5 gleiche Samples von u)

@@ -1,0 +1,19 @@
+
+ x_theoretisch_max = 9.388010744235338e-8        theoretisches Maximum bei u=1.0
+
+ x_theoretisch_min = -9.338934498252609e-8       theoretisches Minimum bei u=1.0
+
+
+
+
+
+ x_theoretisch_max = 9.388010744235338e-8        theoretisches Maximum bei u=-1.0
+
+ x_theoretisch_min = -9.338934498256701e-8       theoretisches Minimum bei u=-1.0
+
+
+
+#-------------------------Ergebnis-------------------------------------------------------------------------
+
+ x_theoretisch_max =  9.388010744235338e-8	theoretisches Maximum bei u= 1.0
+ x_theoretisch_min = -9.338934498256701e-8      theoretisches Minimum bei u=-1.0 
