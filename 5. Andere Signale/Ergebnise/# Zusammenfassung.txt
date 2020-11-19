@@ -1,0 +1,3 @@
+1. audio_drumloop	x_max = 3.274328970504437e-8
+2. sawtoothwave		x_max = 3.2683909761098064e-8
+
