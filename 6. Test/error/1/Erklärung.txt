@@ -1,0 +1,60 @@
+------Fehler_1--------- 
+Wenn man x_out mit for schleife berechnet wie z.B:
+
+x_in=range(-3.3e-8, stop=-3.3e-8, length=10)
+
+for n in eachindex(x_in)
+ model.x[1]=x_in[n]
+ ACME.step!(ModelRunner(model,false),y,u,1)
+ x_out[n]=model.x[1]
+end
+
+
+dann hängen die Werte von einander ab, das heist x_in[1] beeinflusst x_in[2], x_in[2] beeinflusst x_in[3], usw. Dieses Verhalten ist nicht richtig.
+Als Nachweis:
+
+----- Bei test_1.jl  eine Auswertung von nur einem Wert für x_in = 3.0e-8    ------
+
+bei: x_in = 3.0e-8
+ist: x_out = 3.179716812540112e-8
+
+----- Bei test_2.jl  erfolgt eine Auswertung von 2 Werten für x_in=range(2.0e-8, stop=3.0e-8, length=2)       ------
+
+bei: x_in[2]=3.0e-8
+ist: x_out[2]=3.1797167783389704e-8
+
+----- Bei test_3.jl  erfolgt eine Auswertung von 10 Werten für x_in=range(2.0e-8, stop=3.0e-8, length=10)       ------
+
+bei: x_in[10]=3.0e-8
+ist: x_out[10]=3.179716772655341e-8
+
+Also, mit steigender range length steigt auch der Fehler. 
+
+Mögliche Ursache ist, dass Werte für interne variablen für einen time step von ModelRunner einfluss auf Werte für nächsten time step haben 
+
+
+-------Lösing----------
+setze definition von model nicht global sondern in Schleife. dann wird bei jedem loop ein neues model erzeugt und somit neues ModelRunner und die Werte sicht so nicht voneinander abhängig
+
+
+for n in eachindex(x_in)
+ model = DiscreteModel(circ, 1/fs)  
+ model.x[1]=x_in[n]
+ ACME.step!(ModelRunner(model,false),y,u,1)
+ x_out[n]=model.x[1]
+end
+
+----- Bei test_4.jl  erfolgt eine Auswertung von 10 Werten für x_in=range(2.0e-8, stop=3.0e-8, length=10)       ------
+bei: x_in[10]=3.0e-8
+ist: x_out[10]=3.179716812540112e-8
+
+dies stimmt mit der Auswertung von nur einem einzelnen Wert bei test_1.jl 
+
+----- Bei test_5.jl  erfolgt eine Auswertung von 100 Werten für x_in=range(2.0e-8, stop=3.0e-8, length=100)       ------
+bei: x_in[100]=3.0e-8
+ist: x_out[100]=3.179716812540112e-8
+
+dies stimmt mit der Auswertung von nur einem einzelnen Wert bei test_1.jl 
+
+-----Fazit--------
+Also wenn man model nicht global sondern in Schleife definiert, dann gibt es keine Abhängigkeit von x_out Werten von einander unabhängig von range length

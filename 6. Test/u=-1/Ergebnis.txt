@@ -1,0 +1,47 @@
+u= -1.0
+
+x_in=range(-3.3e-8, stop=3.3e-8, length=100)
+x_min = -3.228299778911528e-8
+
+
+x_in=range(-3.3e-8, stop=3.3e-8, length=1000)
+x_min = -3.22896152566114e-8
+
+
+x_in=range(-3.3e-8, stop=3.3e-8, length=10000)
+x_min = -3.228963503800349e-8
+
+bei größeren Werten von length kommt es zu Problemen bei der Auswertung(sehr lange run time)
+also folgender Ansatz:
+
+---------range_1--------------------------------------------------
+bei: x_in=range(-3.3e-8, stop=3.3e-8, length=10000)
+x_min = x_out[1170] = -3.228963503800349e-8
+
+x_in[1169] = -2.5290429042904288e-8 	# vorheriger Wert
+x_in[1170] = -2.5283828382838284e-8	# der Wert von x_in bei dem x_out minimal wird
+x_in[1171] = -2.5277227722772276e-8	# nachfolgender Wert
+
+also:
+x_in=range(-2.5290429042904288e-8, stop=-2.5277227722772276e-8, length=100)
+x_min = -3.228963544877152e-8
+
+x_in=range(-2.5290429042904288e-8, stop=-2.5277227722772276e-8, length=1000)
+x_min = -3.22896354490273e-8
+
+x_in=range(-2.5290429042904288e-8, stop=-2.5277227722772276e-8, length=10000)
+x_min = 
+
+----------range_2--------------------------------------------------
+bei:range_1 -> bei: x_in=range(-2.5290429042904288e-8, stop=-2.5277227722772276e-8, length=10000)
+x_min = x_out[3291] = -3.2289635449028305e-8
+
+x_in[3290] = -2.5286086694478025e-8	# vorheriger Wert
+x_in[3291] = -2.5286085374213987e-8	# der Wert von x_in bei dem x_out minimal wird
+x_in[3292] = -2.5286084053949946e-8	# nachfolgender Wert
+
+also setze x_in[3290] und x_in[3292] als Grenzen ein:
+x_in=range(-2.5286086694478025e-8, stop=-2.5286084053949946e-8, length=10000)
+
+x_min = x_out[6037] = -3.228963544902833e-8
+(bei x_in[6037] = -2.528608510049588e-8 )

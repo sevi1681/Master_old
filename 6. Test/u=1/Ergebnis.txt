@@ -1,0 +1,47 @@
+u=1.0
+
+x_in=range(-3.3e-8, stop=3.3e-8, length=100)
+x_max = 3.281077516805433e-8
+
+
+x_in=range(-3.3e-8, stop=3.3e-8, length=1000)
+x_max = 3.281366227757979e-8
+
+
+x_in=range(-3.3e-8, stop=3.3e-8, length=10000)
+x_max = 3.2813678418528537e-8
+
+bei größeren Werten von length kommt es zu Problemen bei der Auswertung(sehr lange run time)
+also folgender Ansatz:
+
+---------range_1-----------------------------------------------------------------------------
+bei: 	x_in=range(-3.3e-8, stop=3.3e-8, length=10000)
+x_max=x_out[7922]=3.2813678418528537e-8
+
+x_in[7921] = 2.6138613861386138e-8   	# vorheriger Wert
+x_in[7922] = 2.614191419141914e-8	# der Wert von x_in bei dem x_out maximal wird
+x_in[7923] = 2.6145214521452142e-8	# nachfolgender Wert
+
+also:
+x_in=range(2.6138613861386138e-8, stop=2.6145214521452142e-8, length=100)
+x_max = 3.281367858273145e-8
+
+x_in=range(2.6138613861386138e-8, stop=2.6145214521452142e-8, length=1000)
+x_max = 3.281367858273506e-8
+
+x_in=range(2.6138613861386138e-8, stop=2.6145214521452142e-8, length=10000)
+x_max = 3.281367858273556e-8
+
+----------range_2--------------------------------------------------
+bei:range_1 -> bei: x_in=range(2.6138613861386138e-8, stop=2.6145214521452142e-8, length=10000)
+x_max = x_out[7161] = 3.281367858273556e-8
+
+x_in[7160] = 2.6143339746515905e-8	# vorheriger Wert
+x_in[7161] = 2.6143340406647922e-8 	# der Wert von x_in bei dem x_out maximal wird
+x_in[7162] = 2.6143341066779943e-8	# nachfolgender Wert
+
+also setze x_in[7160] und x_in[7162] als Grenzen ein:
+x_in=range(2.6143339746515905e-8, stop=2.6143341066779943e-8, length=10000)
+
+x_max = x_out[4348] = 3.281367858273556e-8
+(bei x_in[4348] = 2.614334032049208e-8)

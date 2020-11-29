@@ -1,0 +1,91 @@
+----Fehler_2------
+x_out wird falsch berechnet. 
+
+Als Nachweis erfolgt ein Vergleich mit Gleichstromfall (u=const=1.0)
+
+----- Gleichstrom_1.jl    -----
+
+bei u = const = 1.0
+
+x[1] = 0.0
+x[2] = 1.8268744897958157e-8
+x[3] = 2.9424584083759872e-8
+x[4] = 3.2054470094728434e-8
+
+
+----- test_1 ---------
+als x_in[] werden werte von Gleichstrom_1.jl eingesetz, dann folgt die Auswertung: 
+
+
+x_in[1] = 0.0
+x_out[1] = 1.8268744897958157e-8
+
+x_in[2] = 1.8268744897958157e-8
+x_out[2] = 2.9424584083773822e-8
+
+x_in[3] = 2.9424584083759872e-8
+x_out[3] = 3.205447009850325e-8
+
+x_in[4] = 3.2054470094728434e-8
+x_out[4] = 3.0683774168295943e-8
+
+Da x_out der Folgezustand von x_in ist, sollte es so sein, dass x_out[1]=x_in[2] , x_out[2]=x_in[3], x_out[3]=x_in[4]
+man sieht, dass es nicht der Fall ist außer x_out[1], somit ist die Berechung von x_out[2], x_out[3], x_out[4] nicht richtig!
+
+Was ist die Ursache dafür? 
+Für die Analyse müssen p,z untersucht werden, dafür:
+
+----- x_new_berechnung_und_vergleich.jl -------
+hier wird neben x_out auch x_new berechnet, dieser entspricht x_out wird auber anders berechnet, nicht mit step!() sondern über formel, es wird berechnet aus p -> z -> x(n+1)
+Für die Unterscheidung, wird dieser als x_new bezeichent. 
+als Nahcweis die Ausgabe:
+
+ x_out[1] = 1.8268744897958157e-8
+ x_new[1] = 1.8268744897958157e-8
+
+ x_out[2] = 2.9424584083773822e-8
+ x_new[2] = 2.9424584083773822e-8
+
+ x_out[3] = 3.205447009850325e-8
+ x_new[3] = 3.205447009850325e-8
+
+ x_out[4] = 3.0683774168295943e-8
+ x_new[4] = 3.0683774168295943e-8 
+
+man sieht dass die Berechnung gleich erfolgt.
+Analog dazu ist die Berechung bei Gleichstromfall x_new_berechnung_bei_Gleichstrom.jl 
+
+----- test_2 -------
+
+ p[1] = 0.001
+ p[2] = 0.002611303299999909
+ p[3] = 0.003595248316187621
+ p[4] = 0.0038272042623550477
+
+----- test_2_Gleichstrom -------
+
+ p[1] = 0.001
+ p[2] = 0.002611303299999909
+ p[3] = 0.003595248316187621
+ p[4] = 0.0038272042623550477
+
+
+----- test_3 -------
+
+ z[1] = 0.19434834997827827
+ z[2] = 0.5073758402311913
+ z[3] = 0.6540324913006715
+ z[4] = 0.6674281304577062
+
+----- test_3_Gleichstrom -------
+
+ z[1] = 0.19434834997827827
+ z[2] = 0.5073758402310429
+ z[3] = 0.654032491260514
+ z[4] = 0.6674281304582919
+
+--------------------------------------
+Fazit: z wird minicht richtig berechnet
+
+
+
