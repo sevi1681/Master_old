@@ -1,3 +1,11 @@
+vorherige Werte bei Auswertung für nur u=+1 für Maximum bzw. u=-1 für Minumum
 
-x_max =  3.281367858273556e-8
 x_min = -3.228963544902833e-8
+x_max =  3.281367858273556e-8
+
+
+--------------------------------------------
+Neue Werte bei automatischer auswertung aus Ordner "Wertebereich_berechnung"
+
+x_min = -3.228963544902832e-8
+x_max =  3.281367858273556e-8

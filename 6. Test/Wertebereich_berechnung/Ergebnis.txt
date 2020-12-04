@@ -1,0 +1,29 @@
+bei: Accuraracy_test = 1.0e-20 
+
+Maximum: 
+x_in =  2.614334051120927e-8
+x_out = 3.281367858273556e-8
+
+Minimum: 
+x_in =  -2.528608475678724e-8
+x_out = -3.228963544902832e-8
+-----------------------------------------------------
+bei: Accuraracy_test = 1.0e-22 
+
+Maximum: 
+x_in =  2.614334051120931e-8
+x_out = 3.281367858273556e-8
+
+Minimum: 
+x_in  = -2.5286084756786824e-8
+x_out = -3.228963544902832e-8
+
+Also mit steigender Genauigkeit gib es keine Änderung bei Min/max Werten, also ist das entgültige Endergebnis
+
+-----------Fazit----------------------------------------------------------------
+
+Interessant! bei Maximum, bei 2 unterschiedliche Werten für x_in in beiden Fällen wiwd das gleiche Ergebniss für x_out berechnet.
+Es wurde Überprüft (siehe test_max_proof), es stimmt! 
+
+x_min = -3.228963544902832e-8
+x_max =  3.281367858273556e-8
